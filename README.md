@@ -12,7 +12,7 @@ The application is like instagram's replica whereby users can create an account,
 
 * Python3 django framework
 * Postgres
-* Boostrap3
+* Boostrap4
 * Googlefonts
 * Html
 * Css
