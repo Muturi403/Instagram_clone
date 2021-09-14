@@ -86,4 +86,16 @@ class Image(VoteModel, models.Model):
     class Meta:
         ordering = ['-date_uploaded']
 
+class Likes(VoteModel, models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
 
+    def save_likes(self):
+        self.save()
+
+    def delete_like(self):
+        self.delete()
+
+    def count_likes(self):
+        likes = self.likes.count()
+        return likes
