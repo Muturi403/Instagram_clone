@@ -1,0 +1,27 @@
+{% extends 'all_files/base.html' %}
+{% block content %}
+
+<div class="container">
+
+  <div class="row">
+    <img src="{{post.post_image.url}}"  class="img-responsive" alt="">
+  </div>
+
+  <div class="row">
+    <h1 class="text-center">{{post.title}}</h1>
+  </div>
+
+  <div class="row">
+       {% autoescape on %}
+       {{post.post | safe}}
+       {% endautoescape %}
+    
+  </div>
+
+  <div class="row">
+    <p>Posted {{post.pub_date|timesince}} by {{post.profile.title}}</p>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{%extends 'all-insta/base.html'%}
+{% load bootstrap4 %}
+
+{% block content %}
+{{block.super}}
+
+<div class="container">
+    
+    {% for post in posts%}
+    <div class="card mb-4">
+        <div class="card-header">
+          <div class="post_info">
+            <div class="post_name">{{post.title}}</div>
+            <div class="post_location">Kiambu</div>
+            </div>
+            <div class="post_options"><a href=""><i class="fas fa-ellipsis-h"></i></a></div>
+        </div>
+        <div class="card-body mb-4">
+            <img src="{{post.post_image.url}}" class="img-responsive card-img" width="100%" alt="Image">
+        </div>
+        <div class="card-footer mb-4">
+            <p class="text">{{post.post}}</p>
+            <div class="engagement">
+                <a href=""><i class="fas fa-heart"></i></a>
+                <a href=""><i class="far fa-comment"></i></a>
+                <a href=""><i class="far fa-share-square"></i></a>
+                <a href=""><i class="far fa-bookmark"></i></a>
+            </div>
+            <div class="likes">
+                <a href="#">10 likes</a>
+              </div>
+              <div class="time_posted">
+                  {{post.pub_date}}
+              </div>
+        </div>
+        </div>
+    </div>
+    {% empty %}
+  <div class="row">
+    <h2 class="text-center">There are no post items.</h2>
+  </div>
+  {% endfor %}
+  
+</div>
+{% endblock %}

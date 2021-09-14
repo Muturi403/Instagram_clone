@@ -1,0 +1,93 @@
+{% extends 'all/base.html' %}
+{% load static%}
+{% load bootstrap4 %}
+
+{% block content %}
+{{block.super}}
+<div class="container-fluid" style="margin-top:8rem">
+        
+           
+      <div class="row">
+          {% for image in posts %}
+          <div class="col-xs-6 col-sm-6 col-md-8 col-lg-8 mx-auto mb-3">
+              <div class="card">
+                  <div class="card-header ">
+                      {% if image %}
+                      <img src="{{user.profile.photo.url}} " alt="" style="width:50px; height:50px; border-radius:50px;z-index:3;"><span class="ml-3">{{image.profile.username}}</span>
+                        {% else %}
+                      <i class="fa fa-user-circle fa-4x"></i>
+                        {% endif%}
+                    </div>
+                  <div class="card-body">
+                        <img src="{{ image.image_url.url}}" alt="" class="img-responsive img-fluid"  data-toggle="modal" data-target=#{{image.id}}>
+                  </div>
+                  <div class="card-text">
+                      <div class="icons d-flex text-center">
+                          <div></div>
+                          <a href=" {% url 'likes' image.id %}"><i class="fa fa-heart fa-2x text-danger mr-5" style="margin:5px;"></i>{{image.like_add}}</a>
+                            
+                            <a href=" {% url 'comment' image_id=image.id %}"><i class="fa fa-comment fa-2x"></i></a><br><br>
+                            
+                      </div>
+                      <div class="caption" >
+                            <h5 style="margin:5px;"><strong>{{image.profile.username}}</strong><br></h5>
+                            <p style="font-family: 'Merienda', cursive; text-align:center; margin:20px">{{image.caption}}</p>
+                            {% if image.comments_set.all %}
+                            <p class="" > {{image.comments_set.all|length}} comments </p>
+                            {% else %}
+                            <p class="" style="margin:5px;">0 comments </p>
+                            {% endif %}
+                      </div>
+                      
+                  </div>
+                  <div class="card-footer">
+                      <h4>Comments:<span><a href="{% url 'comment' image_id=image.id %}" class="btn btn-sm btn-success" style="float:right">Add Comment</a></span></h4>
+                      <div class="card-body ">
+                            {% for comment in comments %}
+                            {% if comment.image_id == image.id%}
+                           
+                            <h4><strong>{{comment.user}}</strong></h4> 
+                            <br>
+                            <h5 style="">{{comment.comment}}</h5>
+                            <p>{{comment.posted | timesince}}</p>
+                            <hr>
+    
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                  </div>
+              </div>
+            
+          </div>
+  <div class="modal fade " id="{{image.id}}" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="modal-title"><img src="{{user.profile.photo.url}} " alt="" style="width:50px; height:50px; border-radius:50px;z-index:3;"><span class="ml-3">{{image.profile.username}}</span></h4>
+        </div>
+        <div class="modal-body">
+            <img src="{{ image.image.url}}" alt="" class="img-responsive img-fluid">
+            <h5><strong>{{image.profile.username}}</strong> {{image.caption}}</h5>
+            <div class="card-body ">
+                {% for comment in comments %}
+                {% if comment.image_id == image.id%}
+                <h5><strong>{{comment.user}}</strong> {{comment.comment}}</h5>
+                <p>{{comment.posted | timesince}}</p>
+                <hr>
+
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+          
+      </div>
+{% endblock %}
