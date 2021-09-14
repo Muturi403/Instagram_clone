@@ -119,4 +119,17 @@ class Comments(models.Model):
 
 
     def __str__(self):
-        return self.comment      
+        return self.comment  
+      
+class Follow(models.Model):
+    follower = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name='follower')
+    following = models.ForeignKey(User,on_delete=models.CASCADE, null=True, related_name='following')
+    
+    def save_follow(self):
+        self.save()
+
+    def delete_follow(self):
+        self.delete()
+
+    def __str__(self):
+        return self.following          
