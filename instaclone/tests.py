@@ -21,3 +21,26 @@ class ProfileTest(TestCase):
         self.new_profile.delete_profile()
         profile = Profile.objects.all()
         self.assertTrue(len(profile)==0)
+        
+class ImageTestClass(TestCase):
+	
+    def setUp(self):
+        self.new_user = User(username='Titus', email='titusouko@gmail.com', password='1234')
+        self.new_user.save()
+        self.new_profile = Profile(photo='image.png', bio='generous', user=self.new_user)
+        self.new_profile.save()
+        self.new_image = Image(name='Moringa', image='moringa.jpg', caption='wonderful place to be', profile=self.new_user, like_add=0)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_image,Image))
+
+    def test_save_image(self):
+        self.new_image.save_image()
+        image = Image.objects.all()
+        self.assertTrue(len(image)>0)
+
+    def test_delete_image(self):
+        self.new_image.save_image()
+        self.new_image.delete_image()
+        image = Image.objects.all()
+        self.assertTrue(len(image)==0)       
