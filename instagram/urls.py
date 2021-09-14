@@ -20,4 +20,10 @@ from django.contrib.auth import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'', include('instaclone.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
+    url(r'^accounts/', include('django_registration.backends.one_step.urls')),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^accounts/logout/$', views.logout_then_login, {"next_page": '/'}),
+    
 ]
