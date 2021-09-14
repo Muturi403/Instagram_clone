@@ -1,0 +1,2 @@
+Hello &#x1F60a {{name}}
+Welcome to my Instagram clone App.
