@@ -99,3 +99,24 @@ class Likes(VoteModel, models.Model):
     def count_likes(self):
         likes = self.likes.count()
         return likes
+      
+class Comments(models.Model):
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment = models.CharField(max_length = 250, blank=True)
+    posted = models.DateTimeField(auto_now_add=True)
+
+    def save_comment(self):
+        self.save()
+
+    def delete_comment(self):
+        self.delete()
+
+    @classmethod
+    def get_comments(cls,id):
+        comments = cls.objects.filter(image__id=id)
+        return comments
+
+
+    def __str__(self):
+        return self.comment      
