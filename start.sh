@@ -1,0 +1,10 @@
+SECRET_KEY=3fc(noknqjj0hsmb9iz_g9xh@b_*jt3hl)5h!ff@z&62iuafo_
+DEBUG=True
+DB_NAME=
+DB_USER=
+DB_PASSWORD=
+DB_HOST=ec2-3-211-176-230.compute-1.amazonaws.com
+DB_PORT=5432
+MODE=prod
+ALLOWED_HOSTS=*
+DISABLE_COLLECTSTATIC=1
