@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+# import cloudinary.uploader
+# import cloudinary.api
 import os
 import django_heroku
 import dj_database_url
@@ -56,8 +56,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 INSTALLED_APPS = [
-    'cloudinary',
-    'instaclone'
+    # 'cloudinary',
+    'instaclone',
     'bootstrap4',
     'tinymce',
     'vote',
@@ -144,3 +144,9 @@ LOGIN_REDIRECT_URL= '/'
 LOGOUT_REDIRECT_URL= '/'
 
 django_heroku.settings(locals())
+
+cloudinary.config( 
+  cloud_name = "dzwbqiqxf", 
+  api_key = "613738156357136", 
+  api_secret = "v-Ed3VI67ODWBK9YBQPzbB6r6O0" 
+)
